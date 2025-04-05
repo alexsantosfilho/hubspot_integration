@@ -11,7 +11,6 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
-    
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
@@ -23,7 +22,12 @@ public class SecurityConfig {
                     "/oauth/authorize",
                     "/oauth/callback",
                     "/api/contacts",
-                    "/api/webhooks/**"
+                    "/api/webhooks/**",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**",
+                    "/swagger-ui.html",
+                    "/webjars/**",
+                    "/swagger-resources/**"
                 ).permitAll()
                 .anyRequest().authenticated()
             );
