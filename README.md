@@ -129,6 +129,10 @@ Acesse a documentação interativa em:
 
 ## 📚 Documentação Técnica
 
+### Diagrama do Projeto
+![diagram](https://github.com/user-attachments/assets/18c7b9cd-ad89-4eae-9c22-2727c4120682)
+
+
 ### Decisões de Projeto
 
 1. **Arquitetura**:
@@ -175,6 +179,9 @@ Acesse a documentação interativa em:
 5. **Segurança Avançada**:
    - Suporte a refresh token
    - Validações adicionais
+  
+6. Exceptions
+   - Ajustar tratamento global e separar por classes
 
 ## 🤝 Contribuição
 
