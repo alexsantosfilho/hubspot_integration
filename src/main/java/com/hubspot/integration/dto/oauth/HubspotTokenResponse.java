@@ -1,4 +1,4 @@
-package com.hubspot.integration.dto.response;
+package com.hubspot.integration.dto.oauth;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;

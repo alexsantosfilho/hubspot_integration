@@ -1,7 +1,7 @@
 package com.hubspot.integration.controller.api;
 
-import com.hubspot.integration.dto.request.ContactRequestDTO;
-import com.hubspot.integration.dto.response.ContactResponseDTO;
+import com.hubspot.integration.dto.contact.ContactRequestDTO;
+import com.hubspot.integration.dto.contact.ContactResponseDTO;
 import com.hubspot.integration.service.contact.HubSpotContactService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;

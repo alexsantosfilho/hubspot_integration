@@ -1,8 +1,8 @@
 package com.hubspot.integration.service.contact;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hubspot.integration.dto.request.ContactRequestDTO;
-import com.hubspot.integration.dto.response.ContactResponseDTO;
+import com.hubspot.integration.dto.contact.ContactRequestDTO;
+import com.hubspot.integration.dto.contact.ContactResponseDTO;
 
 import lombok.extern.slf4j.Slf4j;
 

@@ -1,4 +1,4 @@
-package com.hubspot.integration.dto.request;
+package com.hubspot.integration.dto.contact;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;

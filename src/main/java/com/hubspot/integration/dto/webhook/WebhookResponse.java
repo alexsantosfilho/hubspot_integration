@@ -1,4 +1,4 @@
-package com.hubspot.integration.dto.response;
+package com.hubspot.integration.dto.webhook;
 
 import lombok.Data;
 

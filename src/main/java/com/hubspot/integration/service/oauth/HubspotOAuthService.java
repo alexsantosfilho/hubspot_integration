@@ -1,7 +1,7 @@
 package com.hubspot.integration.service.oauth;
 
 
-import com.hubspot.integration.dto.response.HubspotTokenResponse;
+import com.hubspot.integration.dto.oauth.HubspotTokenResponse;
 import com.hubspot.integration.exception.OAuthException;
 
 import lombok.RequiredArgsConstructor;
