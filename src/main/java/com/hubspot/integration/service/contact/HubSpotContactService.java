@@ -1,6 +1,6 @@
 package com.hubspot.integration.service.contact;
 
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hubspot.integration.dto.request.ContactRequestDTO;
 import com.hubspot.integration.dto.response.ContactResponseDTO;
 
@@ -45,27 +45,56 @@ public class HubSpotContactService {
         checkRateLimit();
 
         String url = hubspotApiBaseUrl + contactsEndpoint;
-        
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setBearerAuth(accessToken);
 
         HttpEntity<ContactRequestDTO> requestEntity = new HttpEntity<>(contactRequest, headers);
-        
+
         try {
             ResponseEntity<ContactResponseDTO> response = restTemplate.exchange(
                     url,
                     HttpMethod.POST,
                     requestEntity,
                     ContactResponseDTO.class);
-            log.info("Resposta do HubSpot (raw): " + response.getBody());
-            return response.getBody();
-        } catch (HttpClientErrorException e) {
-            log.error("Error creating contact in HubSpot. Status: {}, Response: {}", e.getStatusCode(), e.getResponseBodyAsString());
-            if (e.getStatusCode() == HttpStatus.TOO_MANY_REQUESTS) {
-                throw new RuntimeException("Rate limit excedido. Por favor, tente novamente mais tarde.");
+
+            ContactResponseDTO responseDTO = response.getBody();
+
+            if (responseDTO != null) {
+                responseDTO.setSuccess(true); // Marca como sucesso
+            } else {
+                responseDTO = ContactResponseDTO.builder()
+                        .success(true)
+                        .message("Contato criado com sucesso.")
+                        .build();
             }
-            throw new RuntimeException("Erro ao criar contato no HubSpot: " + e.getMessage());
+
+            log.info("Contato criado com sucesso: {}", responseDTO);
+            return responseDTO;
+
+        } catch (HttpClientErrorException e) {
+            log.error("Erro ao criar contato no HubSpot. Status: {}, Response: {}", e.getStatusCode(),
+                    e.getResponseBodyAsString());
+
+            String message = "Erro ao criar contato no HubSpot. Código: " + e.getStatusCode();
+
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                String detailedMessage = mapper.readTree(e.getResponseBodyAsString())
+                        .path("message")
+                        .asText(null);
+                if (detailedMessage != null) {
+                    message += " - " + detailedMessage;
+                }
+            } catch (Exception parseException) {
+                log.warn("Não foi possível extrair mensagem detalhada do erro: {}", parseException.getMessage());
+            }
+
+            return ContactResponseDTO.builder()
+                    .success(false)
+                    .message(message)
+                    .build();
         }
     }
 
@@ -79,8 +108,8 @@ public class HubSpotContactService {
         }
 
         if (requestCount.incrementAndGet() > rateLimit) {
-            throw new RuntimeException("Rate limit excedido. Limite de " + rateLimit + 
-                                      " requisições a cada " + (rateLimitInterval/1000) + " segundos.");
+            throw new RuntimeException("Rate limit excedido. Limite de " + rateLimit +
+                    " requisições a cada " + (rateLimitInterval / 1000) + " segundos.");
         }
     }
 }
