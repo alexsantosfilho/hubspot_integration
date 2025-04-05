@@ -1,7 +1,3 @@
-Claro! Aqui está o seu README com a seção **“▶️ Passos para Testar a Aplicação”** adicionada, com os detalhes que você passou, formatados de forma clara e organizada:
-
----
-
 # HubSpot Integration API
 
 Esta é uma API Spring Boot para integração com a plataforma HubSpot, oferecendo funcionalidades de criação de contatos, autenticação OAuth 2.0, processamento de webhooks e documentação interativa via Swagger.
@@ -71,8 +67,15 @@ A aplicação estará disponível em `http://localhost:8080`
 3. **Autenticação no HubSpot**
 
    - Acesse no navegador: [http://localhost:8080/oauth/authorize](http://localhost:8080/oauth/authorize)
+     
+     ![image](https://github.com/user-attachments/assets/1b1f9126-8bf5-450d-b5e8-252805461aa3)
+
    - Você será redirecionado para o HubSpot, onde deve selecionar sua conta de desenvolvedor e autorizar a aplicação.
+     ![image](https://github.com/user-attachments/assets/a2e6e76b-a5ec-49fe-8e47-31652c17313f)
+
    - Após autorizar, será feito o callback com o **access token** necessário para as requisições autenticadas.
+     ![image](https://github.com/user-attachments/assets/d33e08cd-ef92-4dad-8928-fb679ac35e89)
+
 
 4. **Testar criação de contato via Postman**
 
@@ -156,7 +159,7 @@ Acesse a documentação interativa em:
 
 2. **Monitoramento**:
    - Health checks e métricas
-   - Integração com Prometheus/Grafana
+   - Integração com APM com DataDog
 
 3. **Testes**:
    - Aumentar testes unitários
