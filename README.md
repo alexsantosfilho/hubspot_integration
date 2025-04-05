@@ -106,6 +106,8 @@ A aplicação estará disponível em `http://localhost:8080`
 Acesse a documentação interativa em:
 
 👉 [http://localhost:8080/swagger-ui.html](http://localhost:8080/swagger-ui.html)
+![image](https://github.com/user-attachments/assets/d4337916-fdee-4831-bda1-974819c7d004)
+
 
 ## 🔧 Endpoints da API
 
